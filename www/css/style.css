@@ -1,0 +1,12 @@
+/* Empty. Add your own CSS if you like */
+.has-tabs-top{
+  top: 0px !important;
+}
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
