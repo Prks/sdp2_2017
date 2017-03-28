@@ -2,10 +2,19 @@ var app = angular.module('starter', ['ionic', 'ngCordova','starter.controllers']
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/login');
 
   $stateProvider
-
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'loginCtrl'
+  })
+  .state('register', {
+    url: '/register',
+    templateUrl: 'templates/register.html',
+    controller: 'registerCtrl'
+  })
   .state('home', {
     url: '/home',
     templateUrl: 'templates/home.html',

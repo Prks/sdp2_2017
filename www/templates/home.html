@@ -1,4 +1,5 @@
 <ion-header-bar align-title="left" >
+<div class="bar bar-header bar-dark">
     <a class="tab-item" href="#/home">
       Home
     </a>
@@ -14,18 +15,26 @@
     <a class="tab-item" href="#/account">
       Account
     </a>
+
+    <a class="tab-item" href="#/login">
+      Logout
+    </a>
+  </div>
 </ion-header-bar>
 
 
-<ion-content class="text-center"> <h4 text-center>Requests</h4>
-<ion-list ng-repeat="x in examples">
-  <ion-item ng-click="expand = !expand" ng-class='{open:click}'>
+<ion-content>
+<div class="list">
+<div class="item item-divider">Requests</div>
+
+<ion-list class="item" ng-repeat="x in examples">
+  <ion-item class="text-center" ng-click="expand = !expand" ng-class='{open:click}'>
     {{x.title}}
 <span ng-hide="expand">
   <br>
   {{x.description}}
 </span>
   </ion-item>
-
 </ion-list>
+</div>
 </ion-content>

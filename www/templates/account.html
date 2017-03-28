@@ -1,23 +1,31 @@
 <ion-header-bar align-title="left" >
-    <a class="tab-item" href="#/home">
-      Home
-    </a>
+  <div class="bar bar-header bar-dark">
+      <a class="tab-item" href="#/home">
+        Home
+      </a>
 
-    <a class="tab-item" href="#/newrequest">
-      New Request
-    </a>
+      <a class="tab-item" href="#/newrequest">
+        New Request
+      </a>
 
-    <a class="tab-item" href="#/myrequests">
-      My requests
-    </a>
+      <a class="tab-item" href="#/myrequests">
+        My requests
+      </a>
 
-    <a class="tab-item" href="#/account">
-      Account
-    </a>
-</ion-header-bar>
+      <a class="tab-item" href="#/account">
+        Account
+      </a>
+
+      <a class="tab-item" href="#/login">
+        Logout
+      </a>
+    </div>
+  </ion-header-bar>
 
 
-<ion-content class="text-center"> <h4 text-center>Account information</h4>
+<ion-content>
+  <div class="list">
+  <div class="item item-divider">Account information</div>
   <ion-list ng-repeat="x in sampleaccount">
     <div>
       <ion-item>
@@ -25,27 +33,24 @@
           <span>
             {{x.name}}
           </span>
+          <br><br>
         </div>
-        <br>
-        <div>
-          <span>
-            {{x.address}}
-          </span>
-        </div>
-        <br>
+
         <div>
           <span>
             {{x.email}}
           </span>
+          <br><br>
         </div>
-        <br>
+
         <div>
           <span>
             {{x.phone}}
           </span>
         </div>
+
       </ion-item>
     </div>
-
   </ion-list>
+</div>
 </ion-content>

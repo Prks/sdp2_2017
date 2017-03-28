@@ -1,28 +1,37 @@
 <ion-header-bar align-title="left" >
-    <a class="tab-item" href="#/home">
-      Home
-    </a>
+  <div class="bar bar-header bar-dark">
+      <a class="tab-item" href="#/home">
+        Home
+      </a>
 
-    <a class="tab-item" href="#/newrequest">
-      New Request
-    </a>
+      <a class="tab-item" href="#/newrequest">
+        New Request
+      </a>
 
-    <a class="tab-item" href="#/myrequests">
-      My requests
-    </a>
+      <a class="tab-item" href="#/myrequests">
+        My requests
+      </a>
 
-    <a class="tab-item" href="#/account">
-      Account
-    </a>
-</ion-header-bar>
+      <a class="tab-item" href="#/account">
+        Account
+      </a>
 
-<ion-content class="text-center"> <h4 text-center>Requests</h4>
-<ion-list ng-repeat="x in myexamples">
-  <ion-item ng-click="expand = !expand" ng-class='{open:click}'>
+      <a class="tab-item" href="#/login">
+        Logout
+      </a>
+    </div>
+  </ion-header-bar>
+
+<ion-content>
+<div class="list">
+<div class="item item-divider">My Requests</div>
+<ion-list class="item" ng-repeat="x in myexamples">
+  <ion-item class="text-center" ng-click="expand = !expand" ng-class='{open:click}'>
     {{x.title}}
 <span ng-hide="expand">
   <br>
   {{x.description}}
 </span>
   </ion-item>
+</div>
 </ion-content>

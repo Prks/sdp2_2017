@@ -3,8 +3,16 @@ var app = angular.module('starter.controllers', ['ionic']);
 app.controller('accountCtrl', function($scope){
 
     $scope.sampleaccount = [
-      { name: 'Bob', address: 'some streetaddress', email: 'some@email.com', phone:'1234578'}
+      { name: 'Bob', email: 'some@email.com', phone:'1234578'}
     ]
+
+  });
+
+app.controller('loginCtrl', function(){
+
+  });
+
+app.controller('registerCtrl', function(){
 
   });
 
