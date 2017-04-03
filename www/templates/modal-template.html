@@ -1,0 +1,32 @@
+<ion-modal-view>
+  <ion-content>
+    <div class="list">
+    <div class="item item-divider">{{example.title}}</div>
+    <ion-list>
+      <ion-item>
+        {{example.description}}
+      </ion-item>
+
+      <ion-item>
+        Address: {{example.address}}
+      </ion-item>
+
+      <ion-item>
+        Destination address: {{example.dest_address}}
+      </ion-item>
+
+      <ion-item>
+        Delivered Before: {{example.delivered_before}}
+      </ion-item>
+
+      <ion-item>
+        Payment: {{example.payment}}
+      </ion-item>
+    </ion-list>
+    <div class="text-right">
+      <button class="button button-dark">Apply</button>
+      <button class="button button-dark" ng-click="modal.hide()">Cancel</button>
+    </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

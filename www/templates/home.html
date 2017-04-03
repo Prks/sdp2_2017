@@ -27,13 +27,9 @@
 <div class="list">
 <div class="item item-divider">Requests</div>
 
-<ion-list class="item" ng-repeat="x in examples">
-  <ion-item class="text-center" ng-click="expand = !expand" ng-class='{open:click}'>
-    {{x.title}}
-<span ng-hide="expand">
-  <br>
-  {{x.description}}
-</span>
+<ion-list class="item" ng-repeat="example in examples">
+  <ion-item class="item-borderless text-center" ng-click="Modalopen(example)">
+    {{example.title}}
   </ion-item>
 </ion-list>
 </div>
