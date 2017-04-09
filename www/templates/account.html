@@ -25,13 +25,13 @@
 
   <ion-content padding="true" class="has-header">
     <ion-list ng-repeat="x in sampleaccount">
-      <h2 id="profile-heading1" style="color:#000000;text-align:center;">{{x.name}}</h2>
+      <h2 id="profile-heading1">{{x.name}}</h2>
         <div id="profile-markdown2" class="show-list-numbers-and-dots">
-          <p style="color:#000000;">My Average raing:
+          <p>My Average Rating:
             <strong>{{x.rating}}</strong>
           </p>
         </div>
-    <ion-toggle toggle-class="toggle-positive" id="profile-toggle1">I am free</ion-toggle>
+    <ion-toggle toggle-class="toggle-positive" id="profile-toggle1">I Am Free</ion-toggle>
       <ion-list id="profile-list1">
         <ion-item id="profile-list-item4">Address
         <span class="item-note">{{x.address}}</span>
@@ -44,7 +44,7 @@
       </ion-item>
     </ion-list>
       <label class="item item-select" id="profile-select1">
-        <span class="input-label">I own</span>
+        <span class="input-label">I Own</span>
         <select>
           <option>Truck</option>
           <option>Car</option>
