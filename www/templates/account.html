@@ -12,7 +12,7 @@
         My requests
       </a>
 
-      <a class="tab-item" href="#/account">
+      <a class="tab-item" href="#/profile">
         Account
       </a>
 
@@ -23,34 +23,35 @@
   </ion-header-bar>
 
 
-<ion-content>
-  <div class="list">
-  <div class="item item-divider">Account information</div>
-  <ion-list ng-repeat="x in sampleaccount">
-    <div>
-      <ion-item>
-        <div>
-          <span>
-            {{x.name}}
-          </span>
-          <br><br>
+  <ion-content padding="true" class="has-header">
+    <ion-list ng-repeat="x in sampleaccount">
+      <h2 id="profile-heading1" style="color:#000000;text-align:center;">{{x.name}}</h2>
+        <div id="profile-markdown2" class="show-list-numbers-and-dots">
+          <p style="color:#000000;">My Average raing:
+            <strong>{{x.rating}}</strong>
+          </p>
         </div>
-
-        <div>
-          <span>
-            {{x.email}}
-          </span>
-          <br><br>
-        </div>
-
-        <div>
-          <span>
-            {{x.phone}}
-          </span>
-        </div>
-
+    <ion-toggle toggle-class="toggle-positive" id="profile-toggle1">I am free</ion-toggle>
+      <ion-list id="profile-list1">
+        <ion-item id="profile-list-item4">Address
+        <span class="item-note">{{x.address}}</span>
       </ion-item>
-    </div>
-  </ion-list>
-</div>
-</ion-content>
+      <ion-item id="profile-list-item5">Contact
+        <span class="item-note">{{x.contact}}</span>
+      </ion-item>
+      <ion-item id="profile-list-item6">Email
+        <span class="item-note">{{x.email}}</span>
+      </ion-item>
+    </ion-list>
+      <label class="item item-select" id="profile-select1">
+        <span class="input-label">I own</span>
+        <select>
+          <option>Truck</option>
+          <option>Car</option>
+          <option>Bike</option>
+          <option>Van</option>
+        </select>
+      </label>
+    </ion-list>
+  <button id="profile-button1" class="button button-positive  button-block">Edit Profile</button>
+  </ion-content>

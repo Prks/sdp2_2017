@@ -3,7 +3,7 @@ var app = angular.module('starter.controllers', ['ionic']);
 app.controller('accountCtrl', function($scope){
 
     $scope.sampleaccount = [
-      { name: 'Bob', email: 'some@email.com', phone:'1234578'}
+      { name: 'Jarvi Tukkanen', rating: '4.2', address: 'Oulunsalo 8', contact: '0445566778', email: 'etu.suku@nimi.com',}
     ]
 
   });
