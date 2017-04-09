@@ -30,8 +30,21 @@
     {{x.title}}
 <span ng-hide="expand">
   <br>
-  {{x.description}}
+  Description: {{x.description}}
+</span>
+<span ng-hide="expand">
+  <br>
+  Deliver from: {{x.address}}
+</span>
+<span ng-hide="expand">
+  <br>
+  Deliver to: {{x.dest_address}}
+</span>
+<span ng-hide="expand">
+  <br>
+  Deliverer: <a href="#/deliverer">{{x.deliverer}}</a>
 </span>
   </ion-item>
 </div>
+</ion-list>
 </ion-content>
