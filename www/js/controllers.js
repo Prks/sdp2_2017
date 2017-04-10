@@ -3,7 +3,7 @@ var app = angular.module('starter.controllers', ['ionic']);
 app.controller('accountCtrl', function($scope){
 
     $scope.sampleaccount = [
-      { name: 'Bob', email: 'some@email.com', phone:'1234578'}
+      { username: 'jtukkanen', password: '********', name: 'Jarvi Tukkanen', rating: '4.2', address: 'Oulunsalo 8', contact: '0445566778', email: 'etu.suku@nimi.com',}
     ]
 
   });
@@ -77,6 +77,9 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal){
     $scope.myexamples = [
       { title: 'My Sample 1 ', description: 'This is description 1', address: 'pöö', dest_address: 'pää', delivered_before: '20.5.1584', payment: '5€'},
       { title: 'My Sample 2', description: 'This is description 2'},
+      { title: 'Deliver my Sofa.', description: 'Anyone with a truck, please help!', address: 'Joulumerkkintie 2', dest_address: 'Pudasjarvi 6', deliverer: 'James Kith', status: 'On the way', deletePost: ''},
+      { title: 'Bed delivery to Pudasjarvi', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4', deliverer:'', status: 'Requested', deletePost:''},
+      { title: 'Bed delivery', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4', deliverer:'Mikko', status: 'Delivered', deletePost:'Yes'},
     ];
 
     $scope.save = function() {
@@ -106,4 +109,13 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal){
       $scope.moda.hide();
     }
 
+  });
+app.controller('delivererCtrl', function($scope){
+    $scope.delivererList = [
+      { name: 'James Kith', averageRating: '3.6', availability: 'Yes', username: 'jkith', email: 'j.kith@kith.com', address: 'Uusikatu 24', owns: 'Truck', myRating: '3'},
+    ];
+
+    $scope.changeReview = function(value){
+      $scope.delivererList[0].myRating = "'"+value+"'";
+    }
   });

@@ -10,3 +10,10 @@
 .right{
   float: right;
 }
+#profile-heading1 {
+	color: #000000;
+	text-align: center;
+}
+.item-note{
+	color: #000000;
+}

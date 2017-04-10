@@ -34,5 +34,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/account',
     templateUrl: 'templates/account.html',
     controller: 'accountCtrl'
+  })
+    .state('deliverer', {
+    url: '/deliverer',
+    templateUrl: 'templates/deliverer.html',
+    controller: 'delivererCtrl'
   });
 });

@@ -33,6 +33,14 @@
         <input ng-model="example.payment" type="text" name="hello">
 
       </ion-item>
+      <span>
+        <br>
+        Delivery Status: {{x.status}}
+      </span>
+      <span>
+        <br>
+        Deliverer: <a href="#/deliverer">{{x.deliverer}}</a>
+      </span>
     </ion-list>
     <div class="text-right">
       <button class="button button-dark" ng-click="save()">Save</button>
