@@ -60,8 +60,9 @@ app.controller('myrequestsCtrl', function($scope){
 
 
     $scope.myexamples = [
-      { title: 'Deliver my Sofa.', description: 'Anyone with a truck, please help!', address: 'Joulumerkkintie 2', dest_address: 'Pudasjarvi 6', deliverer: 'James Kith'},
-      { title: 'Bed delivery to Pudasjarvi', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4'},
+      { title: 'Deliver my Sofa.', description: 'Anyone with a truck, please help!', address: 'Joulumerkkintie 2', dest_address: 'Pudasjarvi 6', deliverer: 'James Kith', status: 'On the way', deletePost: ''},
+      { title: 'Bed delivery to Pudasjarvi', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4', deliverer:'', status: 'Requested', deletePost:''},
+      { title: 'Bed delivery', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4', deliverer:'Mikko', status: 'Delivered', deletePost:'Yes'},
     ];
   });
 app.controller('delivererCtrl', function($scope){
