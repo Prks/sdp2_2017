@@ -50,17 +50,60 @@ app.controller('mdlCtrl', function($scope){
 
 });
 
-app.controller('newrequestCtrl', function(){
+app.controller('newrequestCtrl', function($scope){
 
+  $scope.requests = [];
+
+  $scope.addRequest = function() {
+
+  $scope.requests.push({
+    title: $scope.title,
+    address: $scope.address,
+    description: $scope.description,
+    dest_address: $scope.dest_address,
+    delivered_before: $scope.delivered_before,
+    valid_untill: $scope.valid_untill
   });
+};
 
-app.controller('myrequestsCtrl', function($scope){
+});
+
+
+app.controller('myrequestsCtrl', function($scope, $ionicModal){
 
     $scope.expand = true;
 
 
     $scope.myexamples = [
-      { title: 'My Sample 1 ', description: 'This is description 1'},
+      { title: 'My Sample 1 ', description: 'This is description 1', address: 'pöö', dest_address: 'pää', delivered_before: '20.5.1584', payment: '5€'},
       { title: 'My Sample 2', description: 'This is description 2'},
     ];
+
+    $scope.save = function() {
+      $scope.myexamples.push({
+        title: $scope.title,
+        address: $scope.address,
+        description: $scope.description,
+        dest_address: $scope.dest_address,
+        delivered_before: $scope.delivered_before,
+        payment: $scope.payment
+      });
+      $scope.modal.hide();
+    }
+
+    $scope.Modalopen = function(example){
+      $scope.example = example;
+      $scope.modal.show();
+    }
+
+    $ionicModal.fromTemplateUrl('templates/myrequests-modal.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+    $scope.Modalclose = function(){
+      $scope.moda.hide();
+    }
+
   });
