@@ -5,6 +5,20 @@ app.controller('accountCtrl', function($scope){
     $scope.sampleaccount = [
       { username: 'jtukkanen', password: '********', name: 'Jarvi Tukkanen', rating: '4.2', address: 'Oulunsalo 8', contact: '0445566778', email: 'etu.suku@nimi.com',}
     ]
+    $scope.saveProfile = function() {
+      $scope.sampleaccount.push({
+        username: $scope.username,
+        password: $scope.password,
+        name: $scope.name,
+        rating: $scope.rating,
+        address: $scope.address,
+        contact: $scope.contact,
+        email: $scope.email
+      });
+    }
+    $scope.editProfile = function(details) {
+      $scope.details = details;
+    }
 
   });
 
@@ -106,7 +120,7 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal){
     });
 
     $scope.Modalclose = function(){
-      $scope.moda.hide();
+      $scope.modal.hide();
     }
 
   });

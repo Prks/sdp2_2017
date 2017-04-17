@@ -25,9 +25,34 @@
 <ion-content>
 <div class="list">
 <div class="item item-divider">My Requests</div>
-<ion-list class="item" ng-repeat="example in myexamples">
-  <ion-item class="item-borderless text-center" ng-click="Modalopen(example)">
-    {{example.title}}
+<ion-list class="item" ng-repeat="x in myexamples">
+  <ion-item class="text-center" ng-click="expand = !expand" ng-class='{open:click}'>
+    <strong>{{x.title}}</strong>
+<span ng-hide="expand">
+  <br>
+  Description: {{x.description}}
+</span>
+<span ng-hide="expand">
+  <br>
+  Deliver from: {{x.address}}
+</span>
+<span ng-hide="expand">
+  <br>
+  Deliver to: {{x.dest_address}}
+</span>
+<span ng-hide="expand">
+  <br>
+  Delivery Status: {{x.status}}
+</span>
+<span ng-hide="expand">
+  <br>
+  Deliverer: <a href="#/deliverer">{{x.deliverer}}</a>
+</span>
+<span ng-hide="expand">
+  <br>
+  <button id="profile-button1" class="button button-dark button-inline" ng-click="Modalopen(x)">Edit Request</button>
+  <button id="profile-button1" class="button button-assertive  button-inline">Delete Request</button>
+</span>
   </ion-item>
 </ion-list>
 </div>
