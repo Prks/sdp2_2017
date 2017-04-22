@@ -8,19 +8,19 @@
      <div>
         <label class="item item-input">
         <span class="input-label">Username</span>
-        <input type="text" placeholder="Username">
+        <input type="text" placeholder="Username" ng-model="data.username">
         </label>
      </div>
 
      <div>
         <label class="item item-input">
         <span class="input-label">Password</span>
-        <input type="password" placeholder="Username">
+        <input type="password" placeholder="Password" ng-model="data.password">
         </label>
      </div>
 
 <div class="text-right">
-     <a class="button button-dark" href="#/home">Login</a>
+     <a class="button button-dark" ng-click="login()" >Login</a>
      <a class="button button-dark" href="#/register">Register</a>
 </div>
   </div>
