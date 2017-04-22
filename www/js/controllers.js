@@ -109,6 +109,8 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal){
     ];
 
     $scope.save = function() {
+      /* Maybe needed for server interaction but not for local use. This was causing a new empty entry to be made whenever
+         save was pressed
       $scope.myexamples.push({
         title: $scope.title,
         address: $scope.address,
@@ -117,6 +119,8 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal){
         delivered_before: $scope.delivered_before,
         payment: $scope.payment
       });
+
+      */
       $scope.modal.hide();
     }
 
