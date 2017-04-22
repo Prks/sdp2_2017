@@ -1,62 +1,49 @@
-<ion-header-bar align-title="left" >
-  <div class="bar bar-header bar-dark">
-      <a class="tab-item" href="#/home">
-        Home
-      </a>
-
-      <a class="tab-item" href="#/newrequest">
-        New Request
-      </a>
-
-      <a class="tab-item" href="#/myrequests">
-        My requests
-      </a>
-
-      <a class="tab-item" href="#/account">
-        Account
-      </a>
-
-      <a class="tab-item" href="#/login">
-        Logout
-      </a>
+<ion-modal-view>
+  <ion-content>
+    <div class="list">
+    <div class="item item-divider">
+      <input ng-model="modal.name" type="text" class="input" name="name">
     </div>
-  </ion-header-bar>
+    <ion-list>
+      <ion-item>
+        Username
+        <input ng-model="account.username" type="text" class="input" name="name">
+      </ion-item>
 
+      <ion-item>
+        Contact
+        <input ng-model="account.contact" type="text" class="input" name="name">
+      </ion-item>
 
-  <ion-content padding="true" class="has-header">
-      <h2 id="profile-heading1">{{x.name}}</h2>
-        <div id="profile-markdown2" class="show-list-numbers-and-dots">
-          <p>My Average Rating:
-            <strong>{{x.rating}}</strong>
-          </p>
-        </div>
-    <ion-toggle toggle-class="toggle-positive" id="profile-toggle1">I Am Free</ion-toggle>
-      <ion-list id="profile-list1">
-      <ion-item id="profile-list-item4">Username
-        <input type="text" name="">
+      <ion-item>
+        Contact
+        <input ng-model="account.address" type="text" class="input" name="name">
       </ion-item>
-      <ion-item id="profile-list-item4">Password
-        <input type="text" name="">
+
+      <ion-item>
+        Email
+        <input ng-model="account.email" type="text" class="input" name="name">
       </ion-item>
-      <ion-item id="profile-list-item4">Address
-        <input type="text" name="">
+
+      <ion-item>
+        Old Password
+        <input type="password" class="input">
       </ion-item>
-      <ion-item id="profile-list-item5">Contact
-        <input type="text" name="">
+
+      <ion-item>
+        New Password
+        <input type="password" class="input">
       </ion-item>
-      <ion-item id="profile-list-item6">Email
-        <input type="text" name="">
+
+      <ion-item>
+        Password again
+        <input type="password" class="input">
       </ion-item>
     </ion-list>
-      <label class="item item-select" id="profile-select1">
-        <span class="input-label">I Own</span>
-        <select>
-          <option>Truck</option>
-          <option>Car</option>
-          <option>Bike</option>
-          <option>Van</option>
-        </select>
-      </label>
-    </ion-list>
-  <button id="profile-button1" class="button button-positive  button-block" ng-click="saveProfile(details)">Save Changes</button>
+    <div class="text-right">
+      <button class="button button-dark" ng-click="saveProfile()">Save</button>
+      <button class="button button-dark" ng-click="modal.hide()">Cancel</button>
+    </div>
+  </div>
   </ion-content>
+</ion-modal-view>
