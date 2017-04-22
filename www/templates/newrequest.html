@@ -22,7 +22,7 @@
     </div>
   </ion-header-bar>
 <ion-content>
-  <div class="list">
+  <div class="list" ng-controler="newrequestCtrl">
     <div class="item item-divider">Create a new request</div>
 
 
@@ -73,9 +73,9 @@
         <input type="text" placeholder="15€">
         </label>
      </div>
-</div>
 <div class="text-right">
-     <button class="button button-dark" type="submit" ng-click="addRequest()">Submit</button>
+     <button class="button button-dark" type="submit" ng-click="addNewRequest($parent);goHome('myrequests')">Submit</button>
+</div>
 </div>
 <div ng-repeat="x in requests">
   For testing purposes: {{x}}
