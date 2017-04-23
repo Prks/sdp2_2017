@@ -9,33 +9,33 @@
      <div>
         <label class="item item-input">
         <span class="input-label">Username</span>
-        <input type="text" placeholder="Username..">
+        <input type="text" placeholder="Username.." ng-model="new_user.username">
         </label>
      </div>
 
      <div>
         <label class="item item-input">
         <span class="input-label">Password</span>
-        <input type="password" placeholder="Username..">
+        <input type="password" placeholder="Password.." ng-model="new_user.password">
         </label>
      </div>
 
      <div>
         <label class="item item-input">
         <span class="input-label">Email</span>
-        <input type="text" placeholder="Email..">
+        <input type="text" placeholder="Email.." ng-model="new_user.email">
         </label>
      </div>
 
      <div>
         <label class="item item-input">
         <span class="input-label">Phone number</span>
-        <input type="text" placeholder="Phone number..">
+        <input type="text" placeholder="Phone number.." ng-model="new_user.phone">
         </label>
      </div>
 
 <div class="text-right">
-     <button class="button button-dark">Submit</button>
+     <button class="button button-dark" ng-click="register()">Submit</button>
      <a class="button button-dark" href="#/login">Cancel</a>
 </div>
   </div>

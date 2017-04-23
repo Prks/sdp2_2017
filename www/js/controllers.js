@@ -22,13 +22,38 @@ app.controller('accountCtrl', function($scope){
 
   });
 
-app.controller('loginCtrl', function(){
+app.controller('loginCtrl', function($scope, UserService, $ionicPopup, $state){
+    $scope.data = {};
 
+    $scope.login = function() {
+          console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
+
+          UserService.login($scope.data.username, $scope.data.password).success(function(data) {
+            console.log("LOGIN ok");
+              $scope.data.username = null;
+              $scope.data.password = null;
+              $state.go('home');
+          }).error(function(data) {
+              var alertPopup = $ionicPopup.alert({
+                  title: 'Login failed!',
+                  template: 'Please check your credentials!'
+              });
+          });
+      }
   });
 
-app.controller('registerCtrl', function(){
+app.controller('registerCtrl', function($scope, UserService){
+    $scope.new_user = [];
 
-  });
+    $scope.new_user = {};
+
+    $scope.register = function() {
+
+        UserService.register($scope.new_user);
+        $scope.new_request = {};
+
+    };
+});
 
 app.controller('homeCtrl', function($scope, $ionicModal, $http){
 
@@ -73,7 +98,10 @@ app.controller('newrequestCtrl', function($scope, $http,$state){
 
   $scope.requests = [];
 
+  $scope.new_request = {};
+
   $scope.addRequest = function() {
+
 
   $http({
     method: 'POST',

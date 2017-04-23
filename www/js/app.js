@@ -1,8 +1,8 @@
-var app = angular.module('starter', ['ionic', 'ngCordova','starter.controllers']);
+var app = angular.module('starter', ['ionic', 'ngCordova','starter.controllers','starter.services']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/login');
+
 
   $stateProvider
   .state('login', {
@@ -42,4 +42,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/deliverer.html',
     controller: 'delivererCtrl'
   });
+
+   $urlRouterProvider.otherwise('/login');
 });
