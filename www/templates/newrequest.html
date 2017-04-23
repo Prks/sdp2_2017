@@ -43,7 +43,7 @@
      <div>
         <label class="item item-input">
         <span class="input-label">Destination address</span>
-        <input type="text" ng-model="$parent.dest_address" placeholder="Destination address..">
+        <input type="text" ng-model="$parent.destination_address" placeholder="Destination address..">
         </label>
      </div>
 
@@ -57,28 +57,23 @@
      <div>
         <label class="item item-input">
         <span class="input-label">Delivered before</span>
-        <input type="text" ng-model="$parent.delivered_before" placeholder="Delivered before..">
+        <input type="text" ng-model="$parent.valid_untill" placeholder="Delivered before..">
         </label>
      </div>
 
      <div>
         <label class="item item-input">
-        <span class="input-label">Valid untill</span>
-        <input type="text" ng-model="$parent.valid_untill" placeholder="Valid untill..">
+        <span class="input-label">Payment</span>
+        <input type="text" ng-model="$parent.payment" placeholder="Payment...">
         </label>
      </div>
-          <div>
-        <label class="item item-input">
-        <span class="input-label">Delivery Cost Offer</span>
-        <input type="text" placeholder="15€">
-        </label>
-     </div>
+
 </div>
 <div class="text-right">
      <button class="button button-dark" type="submit" ng-click="addRequest()">Submit</button>
 </div>
 <div ng-repeat="x in requests">
   For testing purposes: {{x}}
- 
+
 </div>
 </ion-content>

@@ -17,6 +17,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
   .state('home', {
     url: '/home',
+    cache: false,
     templateUrl: 'templates/home.html',
     controller: 'homeCtrl'
   })
@@ -27,6 +28,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
   .state('myrequests', {
     url: '/myrequests',
+    cache: false,
     templateUrl: 'templates/myrequests.html',
     controller: 'myrequestsCtrl'
   })

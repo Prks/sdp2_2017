@@ -30,9 +30,14 @@ app.controller('registerCtrl', function(){
 
   });
 
-app.controller('homeCtrl', function($scope, $ionicModal){
+app.controller('homeCtrl', function($scope, $ionicModal, $http){
 
     $scope.expand = true;
+
+$http.get('https://blooming-savannah-38179.herokuapp.com/api/post')
+  .then(function (responce){
+    $scope.examples = responce.data;
+  });
 
     $scope.examples = [
       { title: 'Title 1 ', description: 'Here goes the full description 1', address: 'someaddress 1', dest_address: 'the destination address 1', delivered_before: '14:00', payment: '10€'},
@@ -64,29 +69,38 @@ app.controller('mdlCtrl', function($scope){
 
 });
 
-app.controller('newrequestCtrl', function($scope){
+app.controller('newrequestCtrl', function($scope, $http,$state){
 
   $scope.requests = [];
 
   $scope.addRequest = function() {
 
-  $scope.requests.push({
+  $http({
+    method: 'POST',
+    url: 'https://blooming-savannah-38179.herokuapp.com/api/post',
+    data: {
     title: $scope.title,
     address: $scope.address,
     description: $scope.description,
-    dest_address: $scope.dest_address,
-    delivered_before: $scope.delivered_before,
-    valid_untill: $scope.valid_untill
+    destination_address: $scope.destination_address,
+    valid_untill: $scope.valid_untill,
+    payment: $scope.payment
+    }
+  }).then(function(){
+    $state.transitionTo("home", $state.current.params, {reload: true});
   });
 };
 
 });
 
 
-app.controller('myrequestsCtrl', function($scope, $ionicModal){
+app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state){
 
     $scope.expand = true;
-
+    $http.get('https://blooming-savannah-38179.herokuapp.com/api/post')
+      .then(function (responce){
+        $scope.myexamples = responce.data;
+      });
 
     $scope.myexamples = [
       { title: 'My Sample 1 ', description: 'This is description 1', address: 'pöö', dest_address: 'pää', delivered_before: '20.5.1584', payment: '5€'},
@@ -95,6 +109,15 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal){
       { title: 'Bed delivery to Pudasjarvi', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4', deliverer:'', status: 'Requested', deletePost:''},
       { title: 'Bed delivery', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4', deliverer:'Mikko', status: 'Delivered', deletePost:'Yes'},
     ];
+
+    $scope.delete = function(_id) {
+     $http({
+       method: 'DELETE',
+       url: 'https://blooming-savannah-38179.herokuapp.com/api/post/' + _id,
+     }).then(function(){
+       $state.transitionTo("myrequests", $state.current.params, {reload: true})
+     })
+    }
 
     $scope.save = function() {
       $scope.myexamples.push({
