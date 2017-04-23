@@ -42,9 +42,18 @@ app.controller('loginCtrl', function($scope, UserService, $ionicPopup, $state){
       }
   });
 
-app.controller('registerCtrl', function(){
+app.controller('registerCtrl', function($scope, UserService){
+    $scope.new_user = [];
 
-  });
+    $scope.new_user = {};
+
+    $scope.register = function() {
+
+        UserService.register($scope.new_user);
+        $scope.new_request = {};
+
+    };
+});
 
 app.controller('homeCtrl', function($scope, $ionicModal){
 
@@ -80,21 +89,18 @@ app.controller('mdlCtrl', function($scope){
 
 });
 
-app.controller('newrequestCtrl', function($scope){
+app.controller('newrequestCtrl', function($scope,RequestService){
 
   $scope.requests = [];
 
+  $scope.new_request = {};
+
   $scope.addRequest = function() {
 
-  $scope.requests.push({
-    title: $scope.title,
-    address: $scope.address,
-    description: $scope.description,
-    dest_address: $scope.dest_address,
-    delivered_before: $scope.delivered_before,
-    valid_untill: $scope.valid_untill
-  });
-};
+      RequestService.createRequest($scope.new_request);
+      $scope.new_request = {};
+
+  };
 
 });
 

@@ -23,8 +23,8 @@ angular.module('starter.services', [])
             }
             return promise;
         },
-        logout: function (chat) {
-            chats.splice(chats.indexOf(chat), 1);
+        register: function (new_user) {
+            console.log(new_user);
         },
         get: function (chatId) {
             for (var i = 0; i < chats.length; i++) {
@@ -36,12 +36,12 @@ angular.module('starter.services', [])
         }
     };
 })
-.factory('DeliveryService', function ($q) {
+.factory('RequestService', function ($q) {
 
     var deliveries = null;
 
     return {
-        getDeliveriesByUserId:function($user_id){
+        getRequestsByUserId:function($user_id){
             var deferred = $q.defer();
             var promise = deferred.promise;
  
@@ -60,8 +60,8 @@ angular.module('starter.services', [])
             }
             return promise;
         },
-        createDelivery:function(){
-
+        createRequest:function(new_request){
+            console.log(new_request);
         }
     };
 });
