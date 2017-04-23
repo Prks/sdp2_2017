@@ -162,9 +162,9 @@ app.controller('delivererCtrl', function($scope){
 // This service handles the data that is shared to both home view and my-request page
 app.service('requestService', function(){
   var requestList = [
-      { title: 'Request from Tanne ', description: 'Deliver table to my uncle', address: 'Kotkantie 1', dest_address: 'Isokatu 5', delivered_before: '14:00', payment: '10€'},
-      { title: 'Title 2', description: 'This is description 2'},
-      { title: 'Title 3', description: 'This is description 3'},
+      { title: 'Request from Tanne ', description: 'Deliver table to my uncle', address: 'Kotkantie 1', dest_address: 'Isokatu 5', delivered_before: '14:00', payment: '10€', contact: '0445566778'},
+      { title: 'New Request', description: 'This is description 2'},
+      { title: 'Another Request', description: 'This is description 3'},
   ];
 
   var myRequestList = [
