@@ -16,7 +16,7 @@
       Account
     </a>
 
-    <a class="tab-item" href="#/login">
+    <a class="tab-item"  ng-click="goToLogin()" href="#/login">
       Logout
     </a>
   </div>
@@ -24,6 +24,7 @@
 
 
 <ion-content>
+Welcome {{user.username}}
 <div class="list">
 <div class="item item-divider">Requests</div>
 

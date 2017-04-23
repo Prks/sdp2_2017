@@ -28,7 +28,9 @@ app.controller('loginCtrl', function($scope, UserService, $ionicPopup, $state){
     $scope.login = function() {
           
           UserService.login($scope.data.username, $scope.data.password).success(function(user) {
-              //UserService.setUser(user);
+              UserService.setUser(user);
+			  $scope.data.username = null;
+			  $scope.data.password = null;
               $state.go('home');
           }).error(function(data) {
               var alertPopup = $ionicPopup.alert({
@@ -56,9 +58,16 @@ app.controller('registerCtrl', function($scope, UserService, $ionicPopup, $state
     };
 });
 
-app.controller('homeCtrl', function($scope, $ionicModal, $http){
+app.controller('homeCtrl', function($scope, $ionicModal, $http, UserService,$state){
 
     $scope.expand = true;
+	
+	$scope.user = UserService.getUser();
+	
+	$scope.goToLogin = function() {
+		UserService.setUser(null);
+		$state.transitionTo("home", $state.current.params, {reload: true});
+	}
 
 $http.get('https://blooming-savannah-38179.herokuapp.com/api/post')
   .then(function (responce){

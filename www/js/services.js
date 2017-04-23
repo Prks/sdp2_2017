@@ -12,10 +12,12 @@ angular.module('starter.services', [])
 			var data = {username:username,password:password};
 			
 			$http.post(url, data, {}).then(function successCallback(response) {
-				  
+				  console.log(response);
 				  if(response.data.result == true)
 				  {
-					deferred.resolve(response.data.status);
+					var user = response.data.user;
+					user.password = password;
+					deferred.resolve(user);
 				  }
 				  else
 				  {
@@ -65,7 +67,7 @@ angular.module('starter.services', [])
             }
             return promise;
         },
-		setUser:function($user){
+		setUser:function(user){
 			this.user = user;
 		},
         getUser: function () {
