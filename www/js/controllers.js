@@ -1,11 +1,12 @@
 var app = angular.module('starter.controllers', ['ionic']);
 
-app.controller('accountCtrl', function($scope){
+app.controller('accountCtrl', function($scope, $ionicModal){
 
     $scope.sampleaccount = [
       { username: 'jtukkanen', password: '********', name: 'Jarvi Tukkanen', rating: '4.2', address: 'Oulunsalo 8', contact: '0445566778', email: 'etu.suku@nimi.com',}
     ]
     $scope.saveProfile = function() {
+      /* If uncommented, pushes a new account object. Need to fix binding here.
       $scope.sampleaccount.push({
         username: $scope.username,
         password: $scope.password,
@@ -15,10 +16,25 @@ app.controller('accountCtrl', function($scope){
         contact: $scope.contact,
         email: $scope.email
       });
+      */
+      $scope.modal.hide();
     }
-    $scope.editProfile = function(details) {
-      $scope.details = details;
+
+    $scope.Modalopen = function(account){
+      $scope.account = account;
+      $scope.modal.show();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/editprofile.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+    $scope.Modalclose = function(){
+      $scope.moda.hide();
     }
+
 
   });
 

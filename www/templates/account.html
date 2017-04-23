@@ -24,29 +24,29 @@
 
 
   <ion-content padding="true" class="has-header">
-    <ion-list ng-repeat="x in sampleaccount">
-      <h2 id="profile-heading1">{{x.name}}</h2>
+    <ion-list ng-repeat="account in sampleaccount">
+      <h2 id="profile-heading1">{{account.name}}</h2>
         <div id="profile-markdown2" class="show-list-numbers-and-dots">
           <p>My Average Rating:
-            <strong>{{x.rating}}</strong>
+            <strong>{{account.rating}}</strong>
           </p>
         </div>
     <ion-toggle toggle-class="toggle-positive" id="profile-toggle1">I Am Free</ion-toggle>
       <ion-list id="profile-list1">
               <ion-item id="profile-list-item4">Username
-        <span class="item-note">{{x.username}}</span>
+        <span class="item-note">{{account.username}}</span>
       </ion-item>
               <ion-item id="profile-list-item4">Password
-        <span class="item-note">{{x.password}}</span>
+        <span class="item-note">{{account.password}}</span>
       </ion-item>
         <ion-item id="profile-list-item4">Address
-        <span class="item-note">{{x.address}}</span>
+        <span class="item-note">{{account.address}}</span>
       </ion-item>
       <ion-item id="profile-list-item5">Contact
-        <span class="item-note">{{x.contact}}</span>
+        <span class="item-note">{{account.contact}}</span>
       </ion-item>
       <ion-item id="profile-list-item6">Email
-        <span class="item-note">{{x.email}}</span>
+        <span class="item-note">{{account.email}}</span>
       </ion-item>
     </ion-list>
       <label class="item item-select" id="profile-select1">
@@ -58,6 +58,6 @@
           <option>Van</option>
         </select>
       </label>
+       <button id="profile-button1" class="button button-dark  button-block" ng-click="Modalopen(account)">Edit Profile</button>
     </ion-list>
-  <button id="profile-button1" class="button button-dark  button-block">Edit Profile</button>
   </ion-content>
