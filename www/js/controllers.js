@@ -26,12 +26,9 @@ app.controller('loginCtrl', function($scope, UserService, $ionicPopup, $state){
     $scope.data = {};
 
     $scope.login = function() {
-          console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
-
-          UserService.login($scope.data.username, $scope.data.password).success(function(data) {
-            console.log("LOGIN ok");
-              $scope.data.username = null;
-              $scope.data.password = null;
+          
+          UserService.login($scope.data.username, $scope.data.password).success(function(user) {
+              //UserService.setUser(user);
               $state.go('home');
           }).error(function(data) {
               var alertPopup = $ionicPopup.alert({
@@ -42,16 +39,20 @@ app.controller('loginCtrl', function($scope, UserService, $ionicPopup, $state){
       }
   });
 
-app.controller('registerCtrl', function($scope, UserService){
-    $scope.new_user = [];
+app.controller('registerCtrl', function($scope, UserService, $ionicPopup, $state){
 
     $scope.new_user = {};
 
     $scope.register = function() {
-
-        UserService.register($scope.new_user);
-        $scope.new_request = {};
-
+        UserService.register($scope.new_user).success(function(data) {
+			  UserService.setUser($scope.new_user);
+              $state.go('home');
+          }).error(function(data) {
+              $ionicPopup.alert({
+                  title: 'Register failed!',
+                  template: data
+              });
+          });        
     };
 });
 

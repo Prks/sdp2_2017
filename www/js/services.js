@@ -1,5 +1,5 @@
 angular.module('starter.services', [])
-.factory('UserService', function ($q) {
+.factory('UserService', function ($q,$http) {
 
     var user = null;
 
@@ -7,12 +7,24 @@ angular.module('starter.services', [])
         login: function (username,password) {
             var deferred = $q.defer();
             var promise = deferred.promise;
-
-            if (username == 'user' && password == 'secret') {
-                deferred.resolve('Welcome ' + name + '!');
-            } else {
-                deferred.reject('Wrong credentials.');
-            }
+			
+			var url = 'http://localhost:3000/api/rest/login';
+			var data = {username:username,password:password};
+			
+			$http.post(url, data, {}).then(function successCallback(response) {
+				  
+				  if(response.data.result == true)
+				  {
+					deferred.resolve(response.data.status);
+				  }
+				  else
+				  {
+					deferred.reject(response.data.status);  
+				  }
+			}, function errorCallback(response) {
+				deferred.reject('Something went wrong on server');
+			});
+			
             promise.success = function(fn) {
                 promise.then(fn);
                 return promise;
@@ -24,15 +36,40 @@ angular.module('starter.services', [])
             return promise;
         },
         register: function (new_user) {
-            console.log(new_user);
-        },
-        get: function (chatId) {
-            for (var i = 0; i < chats.length; i++) {
-                if (chats[i].id === parseInt(chatId)) {
-                    return chats[i];
-                }
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+			
+			var url = 'http://localhost:3000/api/rest/register';
+			
+			$http.post(url, new_user, {}).then(function successCallback(response) {
+				  console.log(response);
+				  if(response.data.result == true)
+				  {
+					deferred.resolve(response.data.status);
+				  }
+				  else
+				  {
+					deferred.reject(response.data.status);  
+				  }
+			}, function errorCallback(response) {
+				deferred.reject('Something went wrong on server');
+			});
+			
+            promise.success = function(fn) {
+                promise.then(fn);
+                return promise;
             }
-            return null;
+            promise.error = function(fn) {
+                promise.then(null, fn);
+                return promise;
+            }
+            return promise;
+        },
+		setUser:function($user){
+			this.user = user;
+		},
+        getUser: function () {
+            return this.user;
         }
     };
 })
