@@ -7,6 +7,10 @@
       <a class="tab-item" href="#/newrequest">
         New Request
       </a>
+	  
+	  <a class="tab-item" href="#/myincomingrequests">
+        My incoming Request
+      </a>
 
       <a class="tab-item" href="#/myrequests">
         My requests
@@ -22,42 +26,32 @@
     </div>
   </ion-header-bar>
 
-
   <ion-content padding="true" class="has-header">
-    <ion-list ng-repeat="account in sampleaccount">
-      <h2 id="profile-heading1">{{account.name}}</h2>
+    
         <div id="profile-markdown2" class="show-list-numbers-and-dots">
           <p>My Average Rating:
-            <strong>{{account.rating}}</strong>
+            <strong>{{user.rating}}</strong>
           </p>
         </div>
-    <ion-toggle toggle-class="toggle-positive" id="profile-toggle1">I Am Free</ion-toggle>
+     <!-- <ion-toggle toggle-class="toggle-positive" id="profile-toggle1">I Am Free</ion-toggle> -->
       <ion-list id="profile-list1">
               <ion-item id="profile-list-item4">Username
-        <span class="item-note">{{account.username}}</span>
+        <span class="item-note">{{profile.username}}</span>
       </ion-item>
-              <ion-item id="profile-list-item4">Password
-        <span class="item-note">{{account.password}}</span>
-      </ion-item>
+         
         <ion-item id="profile-list-item4">Address
-        <span class="item-note">{{account.address}}</span>
+        <span class="item-note">{{profile.address}}</span>
       </ion-item>
       <ion-item id="profile-list-item5">Contact
-        <span class="item-note">{{account.contact}}</span>
+        <span class="item-note">{{profile.phone}}</span>
       </ion-item>
       <ion-item id="profile-list-item6">Email
-        <span class="item-note">{{account.email}}</span>
+        <span class="item-note">{{profile.email}}</span>
       </ion-item>
-    </ion-list>
-      <label class="item item-select" id="profile-select1">
-        <span class="input-label">I Own</span>
-        <select>
-          <option>Truck</option>
-          <option>Car</option>
-          <option>Bike</option>
-          <option>Van</option>
-        </select>
-      </label>
-       <button id="profile-button1" class="button button-dark  button-block" ng-click="Modalopen(account)">Edit Profile</button>
+	  <ion-item id="profile-list-item6">I own
+        <span class="item-note">{{profile.transport}}</span>
+      </ion-item>
+
+       <button id="profile-button1" class="button button-dark  button-block" ng-click="Modalopen(profile)">Edit Profile</button>
     </ion-list>
   </ion-content>

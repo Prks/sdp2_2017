@@ -1,32 +1,36 @@
 <ion-header-bar align-title="left" >
-<div class="bar bar-header bar-dark">
-    <a class="tab-item" href="#/home">
-      Home
-    </a>
+  <div class="bar bar-header bar-dark">
+      <a class="tab-item" href="#/home">
+        Home
+      </a>
 
-    <a class="tab-item" href="#/newrequest">
-      New Request
-    </a>
+      <a class="tab-item" href="#/newrequest">
+        New Request
+      </a>
+	  
+	  <a class="tab-item" href="#/myincomingrequests">
+        My incoming Request
+      </a>
 
-    <a class="tab-item" href="#/myrequests">
-      My requests
-    </a>
+      <a class="tab-item" href="#/myrequests">
+        My requests
+      </a>
 
-    <a class="tab-item" href="#/account">
-      Account
-    </a>
+      <a class="tab-item" href="#/account">
+        Account
+      </a>
 
-    <a class="tab-item"  ng-click="goToLogin()" href="#/login">
-      Logout
-    </a>
-  </div>
-</ion-header-bar>
+      <a class="tab-item" href="#/login">
+        Logout
+      </a>
+    </div>
+  </ion-header-bar>
 
 
 <ion-content>
 Welcome {{user.username}}
 <div class="list">
-<div class="item item-divider">Requests</div>
+<div class="item item-divider">Open requests</div>
 
 <ion-list class="item" ng-repeat="example in examples">
   <ion-item class="item-borderless text-center" ng-click="Modalopen(example)">

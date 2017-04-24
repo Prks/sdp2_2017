@@ -1,27 +1,30 @@
 var app = angular.module('starter.controllers', ['ionic']);
 
-app.controller('accountCtrl', function($scope, $ionicModal){
+app.controller('accountCtrl', function($scope, $ionicModal,UserService,$state){
 
-    $scope.sampleaccount = [
-      { username: 'jtukkanen', password: '********', name: 'Jarvi Tukkanen', rating: '4.2', address: 'Oulunsalo 8', contact: '0445566778', email: 'etu.suku@nimi.com',}
-    ]
-    $scope.saveProfile = function() {
-      /* If uncommented, pushes a new account object. Need to fix binding here.
-      $scope.sampleaccount.push({
-        username: $scope.username,
-        password: $scope.password,
-        name: $scope.name,
-        rating: $scope.rating,
-        address: $scope.address,
-        contact: $scope.contact,
-        email: $scope.email
-      });
-      */
-      $scope.modal.hide();
+	$scope.user = UserService.getUser();
+	
+	  UserService.getProfile($scope.user.username).success(function(data) {
+			  $scope.profile = data;
+          }).error(function(data) {
+             
+          });  
+
+    $scope.saveProfile = function(profile) {
+		
+		  UserService.saveProfile(profile).success(function(data) {
+			  $state.reload();
+          }).error(function(data) {
+             
+          });  
+	  
+	  
+      $scope.Modalclose();
     }
 
-    $scope.Modalopen = function(account){
-      $scope.account = account;
+    $scope.Modalopen = function(profile){
+	  let cloned = Object.assign({}, profile);
+      $scope.account = cloned;
       $scope.modal.show();
     };
 
@@ -32,7 +35,8 @@ app.controller('accountCtrl', function($scope, $ionicModal){
     });
 
     $scope.Modalclose = function(){
-      $scope.moda.hide();
+      $scope.modal.hide();
+	  $state.reload();
     }
 
 
@@ -155,23 +159,22 @@ app.controller('newrequestCtrl', function($scope,$http,$state,RequestService){
 
 });
 
-
-app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state,RequestService,UserService){
+app.controller('myincomingrequestsCtrl', function($scope, $ionicModal,$http, $state,RequestService,UserService){
 
     $scope.expand = true;
 	
 	$scope.user = UserService.getUser();
 	
-	RequestService.getRequestsByUserName($scope.user.username).success(function(data) {
+	RequestService.getIncomingRequestsByUserName($scope.user.username).success(function(data) {
 		$scope.myexamples = data;
     }).error(function(data) {
               
     });
 	
-	// Delete request
-    $scope.delete = function(request) {
+	// Reject request
+    $scope.rejectRequest = function(request) {
 		
-		RequestService.deleteRequest(request.request_id).success(function(data) {
+		RequestService.rejectRequest(request.request_id).success(function(data) {
 			$state.reload();
 		}).error(function(data) {
 				  
@@ -219,10 +222,85 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state,Requ
     }
 
   });
-app.controller('delivererCtrl', function($scope){
-    $scope.delivererList = [
-      { name: 'James Kith', averageRating: '3.6', availability: 'Yes', username: 'jkith', email: 'j.kith@kith.com', address: 'Uusikatu 24', owns: 'Truck', myRating: '3'},
-    ];
+
+
+app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state,RequestService,UserService){
+
+    $scope.expand = true;
+	
+	$scope.user = UserService.getUser();
+	
+	RequestService.getRequestsByUserName($scope.user.username).success(function(data) {
+		$scope.myexamples = data;
+    }).error(function(data) {
+              
+    });
+	
+	// Delete request
+    $scope.delete = function(request) {
+		
+		RequestService.deleteRequest(request.request_id).success(function(data) {
+			$state.reload();
+		}).error(function(data) {
+				  
+		});
+    }
+	
+	$scope.getStatus = function(request)
+	{
+		return request.courier_user != null;
+	}
+	
+	$scope.getCourier = function(request)
+	{
+		return request.courier_user == null ? 'Not avaiable' : request.courier_user;
+	}
+
+    $scope.save = function() {
+      
+	  RequestService.editRequest($scope.edit_request).success(function(data) {			
+			$scope.edit_request = null;
+			$scope.modal.hide();
+			$state.reload();
+		}).error(function(data) {
+			console.log(data);	 
+			$scope.modal.hide();
+			$state.reload();			
+		});
+	  
+      
+    }
+	
+	$scope.goToDeliverer = function(request){
+		$state.go('deliverer',{request: request});
+	}
+
+    $scope.Modalopen = function(example){
+      $scope.edit_request = example;
+      $scope.modal.show();
+    }
+
+    $ionicModal.fromTemplateUrl('templates/myrequests-modal.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+    $scope.Modalclose = function(){
+      $scope.modal.hide();
+    }
+
+  });
+  
+app.controller('delivererCtrl', function($scope,$stateParams,UserService){
+    
+	console.log($stateParams.request);
+	
+	UserService.getProfile($stateParams.request.courier_user).success(function(user) {             
+			  $scope.courier = user;
+    }).error(function(data) {
+             
+    });
 
     $scope.changeReview = function(value){
       $scope.delivererList[0].myRating = "'"+value+"'";

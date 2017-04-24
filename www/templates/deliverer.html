@@ -7,6 +7,10 @@
       <a class="tab-item" href="#/newrequest">
         New Request
       </a>
+	  
+	  <a class="tab-item" href="#/myincomingrequests">
+        My incoming Request
+      </a>
 
       <a class="tab-item" href="#/myrequests">
         My requests
@@ -23,45 +27,44 @@
   </ion-header-bar>
 
   <ion-content padding="true" class="has-header">
-  <ion-list ng-repeat="x in delivererList">
-    <h1 id="profile-heading1">{{x.name}}</h1>
+
     <ion-list id="deliverer-list3">
       <ion-item class="item-icon-left" id="deliverer-list-item12">
         <i class="icon ion-android-star-half"></i>Average Rating
-        <span class="item-note">{{x.averageRating}}</span>
+        <span class="item-note">{{courier.averageRating}}</span>
       </ion-item>
     </ion-list>
-    <div id="deliverer-markdown7" class="show-list-numbers-and-dots">
-      <p>Is Available Now:
-        <strong>{{x.availability}}</strong>
-      </p>
-    </div>
+    <!-- <div id="deliverer-markdown7" class="show-list-numbers-and-dots"> -->
+      <!-- <p>Is Available Now: -->
+        <!-- <strong>{{courier.availability}}</strong> -->
+      <!-- </p> -->
+    <!-- </div> -->
     <ion-list id="deliverer-list2">
       <ion-item id="deliverer-list-item7">Username
-        <span class="item-note">{{x.username}}</span>
+        <span class="item-note">{{courier.username}}</span>
       </ion-item>
       <ion-item id="deliverer-list-item9">email
-        <span class="item-note">{{x.email}}</span>
+        <span class="item-note">{{courier.email}}</span>
       </ion-item>
       <ion-item id="deliverer-list-item10">Address
-        <span class="item-note">{{x.address}}</span>
+        <span class="item-note">{{courier.address}}</span>
       </ion-item>
       <ion-item id="deliverer-list-item11">Owns
-        <span class="item-note">{{x.owns}}</span>
+        <span class="item-note">{{courier.transport}}</span>
       </ion-item>
             <ion-item id="deliverer-list-item11">Your Rating
-        <span class="item-note">{{x.myRating}}</span>
+        <span class="item-note">{{courier.rating}}</span>
       </ion-item>
-      <label class="item item-select" id="deliverer-select4">
-        <span class="input-label">Change Your Rating</span>
-        <select ng-model="delivererList.myRating" ng-change="changeReview(value)">
-          <option value="5">5</option>
-          <option value="4">4</option>
-          <option>3</option>
-          <option>2</option>
-          <option>1</option>
-        </select>
-      </label>
+      <!-- <label class="item item-select" id="deliverer-select4"> -->
+        <!-- <span class="input-label">Change Your Rating</span> -->
+        <!-- <select ng-model="delivererList.myRating" ng-change="changeReview(value)"> -->
+          <!-- <option value="5">5</option> -->
+          <!-- <option value="4">4</option> -->
+          <!-- <option>3</option> -->
+          <!-- <option>2</option> -->
+          <!-- <option>1</option> -->
+        <!-- </select> -->
+      <!-- </label> -->
     </ion-list>
-  </ion-list>
+
   </ion-content>

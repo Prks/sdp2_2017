@@ -1,18 +1,11 @@
 <ion-modal-view>
   <ion-content>
     <div class="list">
-    <div class="item item-divider">
-      <input ng-model="account.name" type="text" class="input" name="name">
-    </div>
+    
     <ion-list>
       <ion-item>
-        Username
-        <input ng-model="account.username" type="text" class="input" name="name">
-      </ion-item>
-
-      <ion-item>
         Contact
-        <input ng-model="account.contact" type="text" class="input" name="name">
+        <input ng-model="account.phone" type="text" class="input" name="name">
       </ion-item>
 
       <ion-item>
@@ -24,25 +17,10 @@
         Email
         <input ng-model="account.email" type="text" class="input" name="name">
       </ion-item>
-
-      <ion-item>
-        Old Password
-        <input type="password" class="input">
-      </ion-item>
-
-      <ion-item>
-        New Password
-        <input type="password" class="input">
-      </ion-item>
-
-      <ion-item>
-        Repeat New Password
-        <input type="password" class="input">
-      </ion-item>
     </ion-list>
     <div class="text-right">
-      <button class="button button-dark" ng-click="saveProfile()">Save</button>
-      <button class="button button-dark" ng-click="modal.hide()">Cancel</button>
+      <button class="button button-dark" ng-click="saveProfile(account)">Save</button>
+      <button class="button button-dark" ng-click="Modalclose()">Cancel</button>
     </div>
   </div>
   </ion-content>
