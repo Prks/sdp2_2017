@@ -149,7 +149,7 @@ app.controller('newrequestCtrl', function($scope,$http,$state,RequestService){
 
   $scope.addRequest = function() {
 		RequestService.createRequest($scope.new_request).success(function(data) {			
-			$scope.new_request = null;
+			$scope.new_request = {};
 			console.log(data);
 			$state.transitionTo("myrequests", $state.current.params, {reload: true})
 		}).error(function(data) {
@@ -271,7 +271,8 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state,Requ
       
     }
 	
-	$scope.goToDeliverer = function(request){
+	$scope.goToDeliverer = function($event,request){
+		if(request.courier_user == null){ $event.stopPropagation();return;}
 		$state.go('deliverer',{request: request});
 	}
 
