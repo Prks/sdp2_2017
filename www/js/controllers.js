@@ -82,16 +82,18 @@ app.controller('homeCtrl', function($scope, $ionicModal, $http, UserService,$sta
 	
 	$scope.goToLogin = function() {
 		UserService.setUser(null);
-		$state.transitionTo("home", $state.current.params, {reload: true});
+		$state.transitionTo("login", $state.current.params, {reload: true});
 	}
 	
-	RequestService.getRequestsByUserName($scope.user.username).success(function(data) {
+	//Get all open request and show in homepage
+	RequestService.getOpenRequest().success(function(data) {
+		console.log(data);
 		$scope.examples = data;
     }).error(function(data) {
               
     });
 	
-	//Get all open request and show in homepage
+	
 	// RequestService.getRequestsByUserName($scope.user.username).success(function(data) {
 		// $scope.examples = data;
     // }).error(function(data) {
@@ -103,9 +105,17 @@ app.controller('homeCtrl', function($scope, $ionicModal, $http, UserService,$sta
       $scope.modal.show();
     }
 	
+	// Function to apply request
 	$scope.applyRequest = function(request)
 	{
-		console.warn(request.request_id);
+		//Get all open request and show in homepage
+		RequestService.applyRequest(request.request_id).success(function(data) {			
+			$scope.examples = data;
+			$state.reload();	
+			$scope.Modalclose();
+		}).error(function(data) {
+			$scope.Modalclose();			
+		});
 	}
 
     $ionicModal.fromTemplateUrl('templates/modal-template.html', {
@@ -115,7 +125,7 @@ app.controller('homeCtrl', function($scope, $ionicModal, $http, UserService,$sta
     });
 
     $scope.Modalclose = function(){
-      $scope.moda.hide();
+      $scope.modal.hide();
     }
 
 });
@@ -137,7 +147,7 @@ app.controller('newrequestCtrl', function($scope,$http,$state,RequestService){
 		RequestService.createRequest($scope.new_request).success(function(data) {			
 			$scope.new_request = null;
 			console.log(data);
-			$state.transitionTo("home", $state.current.params, {reload: true})
+			$state.transitionTo("myrequests", $state.current.params, {reload: true})
 		}).error(function(data) {
 			console.log(data);	  
 		});
@@ -157,14 +167,15 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state,Requ
     }).error(function(data) {
               
     });
-
-    $scope.delete = function(_id) {
-     $http({
-       method: 'DELETE',
-       url: 'https://blooming-savannah-38179.herokuapp.com/api/post/' + _id,
-     }).then(function(){
-       $state.transitionTo("myrequests", $state.current.params, {reload: true})
-     })
+	
+	// Delete request
+    $scope.delete = function(request) {
+		
+		RequestService.deleteRequest(request.request_id).success(function(data) {
+			$state.reload();
+		}).error(function(data) {
+				  
+		});
     }
 	
 	$scope.getStatus = function(request)
@@ -178,19 +189,22 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state,Requ
 	}
 
     $scope.save = function() {
-      $scope.myexamples.push({
-        title: $scope.title,
-        address: $scope.address,
-        description: $scope.description,
-        dest_address: $scope.dest_address,
-        delivered_before: $scope.delivered_before,
-        payment: $scope.payment
-      });
-      $scope.modal.hide();
+      
+	  RequestService.editRequest($scope.edit_request).success(function(data) {			
+			$scope.edit_request = null;
+			$scope.modal.hide();
+			$state.reload();
+		}).error(function(data) {
+			console.log(data);	 
+			$scope.modal.hide();
+			$state.reload();			
+		});
+	  
+      
     }
 
     $scope.Modalopen = function(example){
-      $scope.example = example;
+      $scope.edit_request = example;
       $scope.modal.show();
     }
 

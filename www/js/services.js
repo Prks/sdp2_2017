@@ -119,19 +119,18 @@ angular.module('starter.services', [])
             var promise = deferred.promise;
 			
 			var user = UserService.getUser();
-			new_request.creator_user = user.username;
 			
-			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/create';
+			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/open/'+user.username;
 			
-			$http.post(url, new_request, {}).then(function successCallback(response) {
+			$http.get(url, {}, {}).then(function successCallback(response) {
 				  console.log(response);
 				  if(response.data.result == true)
 				  {
-					deferred.resolve(response.data.status);
+					deferred.resolve(response.data.list);
 				  }
 				  else
 				  {
-					deferred.reject(response.data.status);  
+					deferred.reject('Something went wrong');  
 				  }
 			}, function errorCallback(response) {
 				deferred.reject('Something went wrong on server');
@@ -152,19 +151,24 @@ angular.module('starter.services', [])
             var promise = deferred.promise;
 			
 			var user = UserService.getUser();
-			new_request.creator_user = user.username;
 			
-			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/create';
+			var data = {
+				request_id:request_id,
+				creator_user:user.username
+			};
 			
-			$http.post(url, new_request, {}).then(function successCallback(response) {
+			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/delete';
+			console.warn('Apply request');
+			console.warn(data);
+			$http.post(url, data, {}).then(function successCallback(response) {
 				  console.log(response);
 				  if(response.data.result == true)
 				  {
-					deferred.resolve(response.data.status);
+					deferred.resolve(response.data.request);
 				  }
 				  else
 				  {
-					deferred.reject(response.data.status);  
+					deferred.reject('Something went wrong');  
 				  }
 			}, function errorCallback(response) {
 				deferred.reject('Something went wrong on server');
@@ -185,19 +189,24 @@ angular.module('starter.services', [])
             var promise = deferred.promise;
 			
 			var user = UserService.getUser();
-			new_request.creator_user = user.username;
 			
-			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/create';
+			var data = {
+				request_id:request_id,
+				courier_user:user.username
+			};
 			
-			$http.post(url, new_request, {}).then(function successCallback(response) {
+			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/apply';
+			console.warn('Apply request');
+			console.warn(data);
+			$http.post(url, data, {}).then(function successCallback(response) {
 				  console.log(response);
 				  if(response.data.result == true)
 				  {
-					deferred.resolve(response.data.status);
+					deferred.resolve(response.data.request);
 				  }
 				  else
 				  {
-					deferred.reject(response.data.status);  
+					deferred.reject('Something went wrong');  
 				  }
 			}, function errorCallback(response) {
 				deferred.reject('Something went wrong on server');
@@ -223,6 +232,40 @@ angular.module('starter.services', [])
 			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/create';
 			
 			$http.post(url, new_request, {}).then(function successCallback(response) {
+				  console.log(response);
+				  if(response.data.result == true)
+				  {
+					deferred.resolve(response.data.status);
+				  }
+				  else
+				  {
+					deferred.reject(response.data.status);  
+				  }
+			}, function errorCallback(response) {
+				deferred.reject('Something went wrong on server');
+			});
+			
+            promise.success = function(fn) {
+                promise.then(fn);
+                return promise;
+            }
+            promise.error = function(fn) {
+                promise.then(null, fn);
+                return promise;
+            }
+            return promise;
+        },
+		editRequest:function(edit_request){
+			
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+			
+			var user = UserService.getUser();
+			edit_request.creator_user = user.username;
+			
+			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/edit';
+			
+			$http.post(url, edit_request, {}).then(function successCallback(response) {
 				  console.log(response);
 				  if(response.data.result == true)
 				  {

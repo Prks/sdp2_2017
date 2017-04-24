@@ -1,46 +1,42 @@
 <ion-modal-view>
   <ion-content>
     <div class="list">
-    <div class="item item-divider">
-      <input ng-model="example.title" type="text" name="hello" class="input">
-    </div>
+    
     <ion-list>
       <ion-item>
+        Title:
+        <input ng-model="edit_request.title" type="text" name="hello" class="input">
+      </ion-item>
+	  
+	  <ion-item>
         Description:
-        <input ng-model="example.description" type="text" name="hello" class="input">
+        <input ng-model="edit_request.description" type="text" name="hello" class="input">
       </ion-item>
 
       <ion-item>
         Address:
-        <input ng-model="example.address" type="text" name="hello" class="input">
+        <input ng-model="edit_request.address" type="text" name="hello" class="input">
 
       </ion-item>
 
       <ion-item>
         Destination address:
-        <input ng-model="example.destination_address" type="text" name="hello" class="input">
+        <input ng-model="edit_request.deli_address" type="text" name="hello" class="input">
 
       </ion-item>
 
       <ion-item>
         Delivered Before:
-        <input ng-model="example.valid_untill" type="text" name="hello" class="input">
+        <input ng-model="edit_request.deli_time" type="text" name="hello" class="input">
 
       </ion-item>
 
       <ion-item>
         Payment:
-        <input ng-model="example.payment" type="text" name="hello" class="input">
+        <input ng-model="edit_request.payment" type="text" name="hello" class="input">
 
       </ion-item>
-      <span>
-        <br>
-        Delivery Status: {{example.status}}
-      </span>
-      <span>
-        <br>
-        Deliverer: <a href="#/deliverer" ng-click="modal.hide()">{{example.deliverer}}</a>
-      </span>
+   
     </ion-list>
     <div class="text-right">
       <button class="button button-dark" ng-click="save()">Save</button>
