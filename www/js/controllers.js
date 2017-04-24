@@ -74,7 +74,7 @@ app.controller('registerCtrl', function($scope, UserService, $ionicPopup, $state
     };
 });
 
-app.controller('homeCtrl', function($scope, $ionicModal, $http, UserService,$state){
+app.controller('homeCtrl', function($scope, $ionicModal, $http, UserService,$state, RequestService){
 
     $scope.expand = true;
 	
@@ -84,18 +84,13 @@ app.controller('homeCtrl', function($scope, $ionicModal, $http, UserService,$sta
 		UserService.setUser(null);
 		$state.transitionTo("home", $state.current.params, {reload: true});
 	}
-
-$http.get('https://blooming-savannah-38179.herokuapp.com/api/post')
-  .then(function (responce){
-    $scope.examples = responce.data;
-  });
-
-    $scope.examples = [
-      { title: 'Title 1 ', description: 'Here goes the full description 1', address: 'someaddress 1', dest_address: 'the destination address 1', delivered_before: '14:00', payment: '10€'},
-      { title: 'Title 2', description: 'This is description 2'},
-      { title: 'Title 3', description: 'This is description 3'},
-    ];
-
+	
+	RequestService.getRequestsByUserName($scope.user.username).success(function(data) {
+		$scope.examples = data;
+    }).error(function(data) {
+              
+    });
+	
     $scope.Modalopen = function(example){
       $scope.example = example;
       $scope.modal.show();
@@ -120,49 +115,36 @@ app.controller('mdlCtrl', function($scope){
 
 });
 
-app.controller('newrequestCtrl', function($scope, $http,$state){
+app.controller('newrequestCtrl', function($scope,$http,$state,RequestService){
 
   $scope.requests = [];
 
   $scope.new_request = {};
 
   $scope.addRequest = function() {
-
-
-  $http({
-    method: 'POST',
-    url: 'https://blooming-savannah-38179.herokuapp.com/api/post',
-    data: {
-    title: $scope.title,
-    address: $scope.address,
-    description: $scope.description,
-    destination_address: $scope.destination_address,
-    valid_untill: $scope.valid_untill,
-    payment: $scope.payment
-    }
-  }).then(function(){
-    $state.transitionTo("home", $state.current.params, {reload: true});
-  });
-};
+		RequestService.createRequest($scope.new_request).success(function(data) {			
+			$scope.new_request = null;
+			console.log(data);
+			$state.transitionTo("home", $state.current.params, {reload: true})
+		}).error(function(data) {
+			console.log(data);	  
+		});
+   };
 
 });
 
 
-app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state){
+app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state,RequestService,UserService){
 
     $scope.expand = true;
-    $http.get('https://blooming-savannah-38179.herokuapp.com/api/post')
-      .then(function (responce){
-        $scope.myexamples = responce.data;
-      });
-
-    $scope.myexamples = [
-      { title: 'My Sample 1 ', description: 'This is description 1', address: 'pöö', dest_address: 'pää', delivered_before: '20.5.1584', payment: '5€'},
-      { title: 'My Sample 2', description: 'This is description 2'},
-      { title: 'Deliver my Sofa.', description: 'Anyone with a truck, please help!', address: 'Joulumerkkintie 2', dest_address: 'Pudasjarvi 6', deliverer: 'James Kith', status: 'On the way', deletePost: ''},
-      { title: 'Bed delivery to Pudasjarvi', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4', deliverer:'', status: 'Requested', deletePost:''},
-      { title: 'Bed delivery', description: 'Bed delivery', address: 'Joulumerkkintie 2', dest_address: 'Kivikuja 4', deliverer:'Mikko', status: 'Delivered', deletePost:'Yes'},
-    ];
+	
+	$scope.user = UserService.getUser();
+	
+	RequestService.getRequestsByUserName($scope.user.username).success(function(data) {
+		$scope.myexamples = data;
+    }).error(function(data) {
+              
+    });
 
     $scope.delete = function(_id) {
      $http({
@@ -172,6 +154,16 @@ app.controller('myrequestsCtrl', function($scope, $ionicModal,$http, $state){
        $state.transitionTo("myrequests", $state.current.params, {reload: true})
      })
     }
+	
+	$scope.getStatus = function(request)
+	{
+		return request.courier_user != null;
+	}
+	
+	$scope.getCourier = function(request)
+	{
+		return request.courier_user == null ? 'Not avaiable' : request.courier_user;
+	}
 
     $scope.save = function() {
       $scope.myexamples.push({

@@ -8,7 +8,7 @@ angular.module('starter.services', [])
             var deferred = $q.defer();
             var promise = deferred.promise;
 			
-			var url = 'http://localhost:3000/api/rest/login';
+			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/user/login';
 			var data = {username:username,password:password};
 			
 			$http.post(url, data, {}).then(function successCallback(response) {
@@ -41,7 +41,7 @@ angular.module('starter.services', [])
             var deferred = $q.defer();
             var promise = deferred.promise;
 			
-			var url = 'http://localhost:3000/api/rest/register';
+			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/user/register';
 			
 			$http.post(url, new_user, {}).then(function successCallback(response) {
 				  console.log(response);
@@ -75,20 +75,35 @@ angular.module('starter.services', [])
         }
     };
 })
-.factory('RequestService', function ($q) {
+.factory('RequestService', function ($q,UserService,$http) {
 
     var deliveries = null;
+	
+	var url = 'https://sleepy-tor-72561.herokuapp.com';
 
     return {
-        getRequestsByUserId:function($user_id){
+        getRequestsByUserName:function(username){
             var deferred = $q.defer();
             var promise = deferred.promise;
-
-            if (name == 'user1' && pw == 'secret') {
-                deferred.resolve('Welcome ' + name + '!');
-            } else {
-                deferred.reject('Wrong credentials.');
-            }
+			
+			var user = UserService.getUser();
+			
+			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/create/'+user.username;
+			
+			$http.get(url, {username:username}, {}).then(function successCallback(response) {
+				  console.log(response);
+				  if(response.data.result == true)
+				  {
+					deferred.resolve(response.data.list);
+				  }
+				  else
+				  {
+					deferred.reject(response.data.status);  
+				  }
+			}, function errorCallback(response) {
+				deferred.reject('Something went wrong on server');
+			});
+			
             promise.success = function(fn) {
                 promise.then(fn);
                 return promise;
@@ -100,7 +115,37 @@ angular.module('starter.services', [])
             return promise;
         },
         createRequest:function(new_request){
-            console.log(new_request);
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+			
+			var user = UserService.getUser();
+			new_request.creator_user = user.username;
+			
+			var url = 'https://sleepy-tor-72561.herokuapp.com/api/rest/request/create';
+			
+			$http.post(url, new_request, {}).then(function successCallback(response) {
+				  console.log(response);
+				  if(response.data.result == true)
+				  {
+					deferred.resolve(response.data.status);
+				  }
+				  else
+				  {
+					deferred.reject(response.data.status);  
+				  }
+			}, function errorCallback(response) {
+				deferred.reject('Something went wrong on server');
+			});
+			
+            promise.success = function(fn) {
+                promise.then(fn);
+                return promise;
+            }
+            promise.error = function(fn) {
+                promise.then(null, fn);
+                return promise;
+            }
+            return promise;
         }
     };
 });

@@ -38,15 +38,15 @@
 </span>
 <span ng-hide="expand">
   <br>
-  Deliver to: {{x.destination_address}}
+  Deliver to: {{x.deli_address}}
 </span>
 <span ng-hide="expand">
   <br>
-  Delivery Status: {{x.status}}
+  Delivery Status:  {{getStatus(x)}}
 </span>
 <span ng-hide="expand">
   <br>
-  Deliverer: <a href="#/deliverer">{{x.deliverer}}</a>
+  Deliverer: <a href="#/deliverer"> {{getCourier(x)}}</a>
 </span>
 <span ng-hide="expand">
   <br>
