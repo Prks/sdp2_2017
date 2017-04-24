@@ -91,10 +91,22 @@ app.controller('homeCtrl', function($scope, $ionicModal, $http, UserService,$sta
               
     });
 	
+	//Get all open request and show in homepage
+	// RequestService.getRequestsByUserName($scope.user.username).success(function(data) {
+		// $scope.examples = data;
+    // }).error(function(data) {
+              
+    // });
+	
     $scope.Modalopen = function(example){
       $scope.example = example;
       $scope.modal.show();
     }
+	
+	$scope.applyRequest = function(request)
+	{
+		console.warn(request.request_id);
+	}
 
     $ionicModal.fromTemplateUrl('templates/modal-template.html', {
       scope: $scope
