@@ -9,28 +9,42 @@
      <div>
         <label class="item item-input">
         <span class="input-label">Username</span>
-        <input type="text" placeholder="Username.." ng-model="new_user.username">
+        <input type="text" placeholder="Username.." ng-model="new_user.username" required>
         </label>
      </div>
 
      <div>
         <label class="item item-input">
         <span class="input-label">Password</span>
-        <input type="password" placeholder="Password.." ng-model="new_user.password">
+        <input type="password" placeholder="Password.." ng-model="new_user.password" required>
         </label>
      </div>
 
      <div>
         <label class="item item-input">
         <span class="input-label">Email</span>
-        <input type="text" placeholder="Email.." ng-model="new_user.email">
+        <input type="email" placeholder="Email.." ng-model="new_user.email" required>
         </label>
      </div>
 
      <div>
         <label class="item item-input">
         <span class="input-label">Phone number</span>
-        <input type="text" placeholder="Phone number.." ng-model="new_user.phone">
+        <input type="number" placeholder="Phone number.." ng-model="new_user.phone" required>
+        </label>
+     </div>
+
+     <div>
+        <label class="item item-input">
+        <span class="input-label">Address</span>
+        <input type="text" placeholder="Address.." ng-model="new_user.address" required>
+        </label>
+     </div>
+
+     <div>
+        <label class="item item-input">
+        <span class="input-label">I own</span>
+        <input type="text" placeholder="Car or bike.." ng-model="new_user.owns" required>
         </label>
      </div>
 
